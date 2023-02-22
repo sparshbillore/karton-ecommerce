@@ -32,7 +32,7 @@ environ.Env.read_env()
 SECRET_KEY = 'django-insecure-na633c%00c^@*@xw!7fui=3#0lhen^-ze_r72*lkoxq-upued0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -105,6 +105,9 @@ MIDDLEWARE = [
 
 
     'django.middleware.security.SecurityMiddleware',
+
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -204,7 +207,9 @@ STATICFILES_DIRS = [
     
 ]
 
-MEDIA_ROOT = 'static/images'
+MEDIA_ROOT = BASE_DIR / 'static/images'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -226,3 +231,7 @@ STRIPE_WEBHOOK_SECRET = 'whsec_ee3c30d55332e8e56871f742ef66abb36a98484040a1150bd
 
 CHECKOUT_SUCCESS_URL = 'http://localhost:3000/checkout/success/'
 CHECKOUT_FAILED_URL = 'http://localhost:3000/checkout/failed/'
+
+
+if os.getcwd() == '/app':
+    DEBUG = False
