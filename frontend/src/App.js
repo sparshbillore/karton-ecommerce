@@ -1,5 +1,7 @@
 import { Container } from "react-bootstrap";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Elements } from '@stripe/react-stripe-js'
+import { loadStripe } from "@stripe/stripe-js/pure"
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomeScreen from "./screens/HomeScreen";
@@ -12,9 +14,14 @@ import ShippingScreen from "./screens/ShippingScreen";
 import PaymentScreen from "./screens/PaymentScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
+import CheckoutSuccess from "./screens/CheckoutSuccess";
+
+const stripe_key = process.env.REACT_APP_STRIPE
+const stripePromise = loadStripe(stripe_key)
 
 function App() {
   return (
+    <Elements stripe={stripePromise} > 
     <Router>
       <div>
         <Header />
@@ -31,6 +38,7 @@ function App() {
               <Route path='/payment' element={<PaymentScreen />} />
               <Route path='/placeOrder' element={<PlaceOrderScreen />} />
               <Route  path="/order/:id" element={<OrderScreen />}></Route>
+              <Route path="/checkout/success" element={<CheckoutSuccess />}></Route>
 
               
             </Routes>
@@ -39,6 +47,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </Elements>
   );
 }
 

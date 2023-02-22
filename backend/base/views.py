@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.conf import settings
+from django.shortcuts import render, redirect
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated , IsAdminUser
-
 from .models import Product, Order, OrderItem, ShippingAddress, Review
 from .serializer import ProductSerializer , UserSerializer ,UserSerializerWithToken, OrderSerializer
 from rest_framework import status
@@ -12,6 +12,7 @@ from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 import datetime
+import stripe
 
 
 
@@ -102,7 +103,7 @@ class Products(APIView):
             return Response(serializer.data)
 
         query = request.query_params.get('keyword')
-        print('query:' , query)
+        
         if query == None:
             query = ''
 
@@ -266,3 +267,7 @@ class ProductReview(APIView):
             product.save()
 
             return Response('Review Added')
+
+
+
+

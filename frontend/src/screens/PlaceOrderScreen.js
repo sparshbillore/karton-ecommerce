@@ -8,9 +8,13 @@ import CheckoutSteps from '../components/CheckoutSteps'
 import { createOrder } from '../redux/orders/orderCreateSlice';
 import { orderCreateReset } from '../redux/orders/orderCreateSlice';
 
+
+const KEY = process.env.REACT_APP_STRIPE;
+
+
 function PlaceOrderScreen() {
 
-     const orderCreate = useSelector(state => state.orderCreate)
+    const orderCreate = useSelector(state => state.orderCreate)
     const { order, error, success } = orderCreate
 
     const dispatch = useDispatch()

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { PayPalButton } from 'react-paypal-button-v2'
 import Message from "../components/Message";
 import Loader from "../components/Loader";
+import PayButton from "../components/PayButton";
 import { getOrderDetails } from "../redux/orders/orderDetailSlice";
 // import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../constants/orderConstants'
 
@@ -37,36 +38,9 @@ function OrderScreen() {
 
   console.log(itemsPrice);
 
-  // const addPayPalScript = () => {
-  //     const script = document.createElement('script')
-  //     script.type = 'text/javascript'
-  //     script.src = 'https://www.paypal.com/sdk/js?client-id=AeDXja18CkwFUkL-HQPySbzZsiTrN52cG13mf9Yz7KiV2vNnGfTDP0wDEN9sGlhZHrbb_USawcJzVDgn'
-  //     script.async = true
-  //     script.onload = () => {
-  //         setSdkReady(true)
-  //     }
-  //     document.body.appendChild(script)
-  // }
-
-  // useEffect(() => {
-
-  //     if (!userInfo) {
-  //         navigate('/login')
-  //     }
-
-  //     if (!order || successPay || order._id !== Number(orderId) || successDeliver) {
-  //         dispatch({ type: ORDER_PAY_RESET })
-  //         dispatch({ type: ORDER_DELIVER_RESET })
-
-  //         dispatch(getOrderDetails(orderId))
-  //     } else if (!order.isPaid) {
-  //         if (!window.paypal) {
-  //             addPayPalScript()
-  //         } else {
-  //             setSdkReady(true)
-  //         }
-  //     }
-  // }, [dispatch, order, orderId, successPay, successDeliver])
+  const checkout = () => {
+    console.log("hello checkout")
+  }
 
   useEffect(() => {
     if (!userInfo) {
@@ -209,10 +183,7 @@ function OrderScreen() {
 
               <ListGroup.Item>
                 <Row>
-
-                  <Button type="submit" variant="primary" className="mt-3">
-                    Proceed To Pay
-                  </Button>
+                    <PayButton order={order}/>
                 </Row>
               </ListGroup.Item>
 

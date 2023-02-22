@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "corsheaders",
 
     'base.apps.BaseConfig',
+    'checkout.apps.CheckoutConfig',
 ]
 
 
@@ -192,3 +193,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 STRIPE_SECRET_KEY = 'sk_test_51MTNQ2SHwGfVRnw72U9go6PiYfydn2o6LpYRDBNRCMmyulvjtrgECcEEVzHiq6yJ3YlQzOy18xuIpfi3MmlhH2VV00Xcc6csg6'
+
+STRIPE_PUBLIC_KEY = 'pk_test_51MTNQ2SHwGfVRnw7VrZ5DZFF4ryxV3THiTlIeduuZ928W8uLrVnVdoQf1ime7BFHUXNOwvrPTEqYE7PnfGdtvLEG00MxruvYjL'
+
+
+STRIPE_WEBHOOK_SECRET = 'whsec_ee3c30d55332e8e56871f742ef66abb36a98484040a1150bdbb147f920eaf67a'
+
+
+
+CHECKOUT_SUCCESS_URL = 'http://localhost:3000/checkout/success/'
+CHECKOUT_FAILED_URL = 'http://localhost:3000/checkout/failed/'

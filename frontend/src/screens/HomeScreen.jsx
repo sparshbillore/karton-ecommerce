@@ -19,7 +19,7 @@ function HomeScreen() {
   );
 
   let keyword = locate.search;
-  console.log('HomeKyeword',keyword)
+ 
  
 
   useEffect(() => {

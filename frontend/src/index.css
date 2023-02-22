@@ -35,10 +35,6 @@ top: 0;
 color: #fff;
 }
 
-.product-img-container img {
-  width: 400px !important;
-}
-
 .carousel img {
 display:block;
 height: 300px;
