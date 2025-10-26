@@ -254,3 +254,9 @@ cython_debug/
 
 # Local development
 local_settings.py
+
+# Product images (stored in S3, not in git)
+static/images/*.jpg
+static/images/*.jfif
+static/images/*.png
+static/images/*.gif
