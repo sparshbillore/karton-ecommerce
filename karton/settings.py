@@ -147,14 +147,31 @@ WSGI_APPLICATION = 'karton.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# Database configuration - use SQLite for local development by default
-# Set USE_POSTGRES=True in .env to use PostgreSQL
-if env('USE_POSTGRES', default=False):
+# Database configuration
+# Priority: RDS credentials > DATABASE_URL > SQLite
+if env('DB_HOST', default=None):
+    # Use RDS with individual credentials
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': env('DB_NAME', default='karton_ecommerce'),
+            'USER': env('DB_USER', default='kartonuser'),
+            'PASSWORD': env('DB_PASSWORD', default=''),
+            'HOST': env('DB_HOST'),
+            'PORT': env('DB_PORT', default='5432'),
+            'OPTIONS': {
+                'connect_timeout': 10,
+            },
+        }
+    }
+elif env('DATABASE_URL', default=None):
+    # Use DATABASE_URL (for Render or other services)
     import dj_database_url
     DATABASES = {
         'default': dj_database_url.parse(env('DATABASE_URL'))
     }
 else:
+    # Use SQLite for local development
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
